@@ -1,0 +1,36 @@
+#!/bin/sh
+echo enter profile name:
+read PROFILE
+
+FIREFOX_PREFIX=/home/razak/.mozilla/firefox/profiles/$PROFILE
+
+FROM_USERJS=/home/razak/dots/.firefox/user.js
+FROM_UPDATE=/home/razak/dots/.firefox/updater.sh
+FROM_USERJS_OVERRIDE=/home/razak/dots/.firefox/user-overrides.js
+
+if [ -d "$FIREFOX_PREFIX" ]; then
+  TO_USERJS=$FIREFOX_PREFIX/user.js
+  TO_UPDATE=$FIREFOX_PREFIX/updater.sh
+  TO_USERJS_OVERRIDE=$FIREFOX_PREFIX/user-overrides.js
+else
+  echo "$FIREFOX_PREFIX does not exist" && exit
+fi
+
+# from=($FROM_USERJS $FROM_UPDATE $FROM_USERJS_OVERRIDE)
+# to=($TO_USERJS $TO_UPDATE $TO_USERJS_OVERRIDE)
+
+# for i in ${from[@]}; do
+#   echo $i
+# done
+
+# for i in ${to[@]}; do
+#   echo $i
+# done
+
+# ln -s $FROM_USERJS $TO_USERJS
+# ln -s $FROM_UPDATE $TO_UPDATE
+# ln -s $FROM_USERJS_OVERRIDE $TO_USERJS_OVERRIDE
+
+cp $FROM_USERJS $FIREFOX_PREFIX
+cp $FROM_UPDATE $FIREFOX_PREFIX
+cp $FROM_USERJS_OVERRIDE $FIREFOX_PREFIX
